@@ -1,4 +1,4 @@
-export function inboxEmailComp(el) {
+export function sentEmailComp() {
     const compEl = document.createElement("div")
 
     compEl.innerHTML = `<div class="sent-email-container">
@@ -6,5 +6,5 @@ export function inboxEmailComp(el) {
                 <p class="email-text">Lo que esta en la url</p>
             </div>`;
     
-    el.appendChild(compEl);
+    return compEl
 }

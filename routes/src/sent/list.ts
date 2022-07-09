@@ -1,15 +1,13 @@
-export function sentListComp(el) {
+export function sentListComp() {
     const compEl = document.createElement("div")
 
     compEl.innerHTML = `<div class="sent-container">
                 <h1 class="sent-title">Sent</h1>
-                <a href="" class="sent-email">
-                    <button class="sent-email">Un email</button>
+                <a href="/inbox/12" class="link sent-email">Email 1
                 </a>
-                <a href="" class="sent-email">
-                    <button class="sent-email">Un email</button>
+                <a href="/inbox/42" class="link sent-email">Email 2
                 </a>
             </div>`;
     
-    el.appendChild(compEl);
+    return compEl;
 }

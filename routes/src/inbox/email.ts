@@ -1,10 +1,12 @@
-export function inboxEmailComp(el) {
+export function inboxEmailComp() {
     const compEl = document.createElement("div")
+    const emailId = location.pathname.split("/")[2];
+    console.log(emailId);
 
-    compEl.innerHTML = `div class="email-container">
+    compEl.innerHTML = `<div class="email-container">
                 <h2 class="email-title">Recibido</h2>
-                <p class="email-text">Lo que esta en la url</p>
+                <p class="email-text">Email: ${emailId}</p>
             </div>`;
     
-    el.appendChild(compEl);
+    return compEl
 }

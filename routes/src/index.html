@@ -7,7 +7,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel="stylesheet" href="./index.css">
-    <script defer src="./index.ts"></script>
+    <script type="module" defer src="./index.ts"></script>
 </head>
 <body>
     <header class="header">
@@ -15,18 +15,13 @@
         <input type="text" class="input">
         <button class="search-button">Buscar</button>
     </header>
-    <nav class="nav-buttons">
+    <div class="nav-buttons">
         <div class="container-buttons">
-            <a class="inbox-button" href="/inbox">
-                <button class="inbox-button">Inbox</button>
-            </a>
-            <a class="sent-button" href="/sent">
-                <button class="sent-button">Sent</button>
-            </a>
+            <a href="/inbox" class="link inbox-button">Inbox</a>
+            <a href="/sent" class="link sent-button">Sent</a>
         </div>
-        <section class="inbox-section"></section>
-        <section class="sent-section"></section>
-    </nav>
+        <div class="content"></div>
+    </div>
 
 
 </body>

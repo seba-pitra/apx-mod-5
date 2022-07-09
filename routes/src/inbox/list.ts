@@ -1,15 +1,13 @@
-export function inboxListComp(el) {
+export function inboxListComp() {
     const compEl = document.createElement("div")
 
     compEl.innerHTML = `<div class="inbox-container">
                 <h1 class="inbox-title">Inbox</h1>
-                <a href="" class="inbox-email">
-                    <button class="inbox-email">Un email</button>
+                <a href="/inbox/12" class="link inbox-email">Email 1
                 </a>
-                <a href="" class="inbox-email">
-                    <button class="inbox-email">Un email</button>
+                <a href="/inbox/32" class="link inbox-email">Email 2
                 </a>
             </div>`;
     
-    el.appendChild(compEl);
+    return compEl
 }

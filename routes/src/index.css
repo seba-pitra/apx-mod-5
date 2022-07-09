@@ -209,6 +209,9 @@ body {
     font-size: 30px;
 }
 
+.content {
+    flex-grow: 1;
+}
 
 
 
