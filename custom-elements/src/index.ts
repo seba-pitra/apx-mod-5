@@ -1,38 +1,45 @@
-(function main() {
-    class title extends HTMLElement {
-        constructor() {
-            super();
-            this.textContent = "soy constructor"
-            this.render();
-        }
-        render() {
-            let style = document.createElement("style");
-            style.textContent = `
-            .container-title {
-                min-height: 65px;
-                max-width: 600px;
-            }
-            .title {
-                font-family: 'Poppins', sans serif;
-                font-size: 52px;
-                margin: 0;
-                text-align: center;
-            }`
+import { init as titleComp } from "./components/title/title";
+import { init as subtitleComp } from "./components/subtitle/subtitle";
+import { init as mediumTextComp } from "./components/medium-text/medium-text";
+import { init as headerComp } from "./components/header/header";
+import { init as formComp} from "./components/form/form";
+import { init as footerComp} from "./components/footer/footer";
 
-            let shadow = this.attachShadow({ mode: "open" })
-            shadow.appendChild(style);
-
-            let div = document.createElement("div");
-            let title = document.createElement("h1");
+// function initContainerComp() {
+//     class Container extends HTMLElement {
+//         constructor() {
+//             super();
+//             this.render();
+//         }
+//         render() {
+//             let style = document.createElement("style");
+//             style.textContent = `
+//             .container {
+//                 display: flex;
+//                 flex-direction: column;
+//                 align-items: center;
+//             }`;
+    
+//             let shadow = this.attachShadow({ mode: "open" });
+    
+//             let container = document.createElement("div");
+             
+//             container.classList.add("container");
             
-            div.classList.add("container-title")
-            title.classList.add("title")
-            title.textContent = "Titulo de esta pagina"
-            div.appendChild(title)
+//             shadow.appendChild(style);
+//             shadow.appendChild(container)
+//         }
+//     }
+//     customElements.define("container-el", Container)
+// }
 
-            shadow.appendChild(div)
-        }
-    }
-
-    customElements.define("title-el", title)
+(function main() {
+    
+    // initContainerComp();
+    titleComp();
+    subtitleComp();
+    mediumTextComp();
+    headerComp();
+    formComp();
+    footerComp();
 })()

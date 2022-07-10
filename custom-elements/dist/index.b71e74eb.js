@@ -532,42 +532,387 @@ function hmrAcceptRun(bundle, id) {
 }
 
 },{}],"h7u1C":[function(require,module,exports) {
+var _title = require("./components/title/title");
+var _subtitle = require("./components/subtitle/subtitle");
+var _mediumText = require("./components/medium-text/medium-text");
+var _header = require("./components/header/header");
+var _form = require("./components/form/form");
+var _footer = require("./components/footer/footer");
+// function initContainerComp() {
+//     class Container extends HTMLElement {
+//         constructor() {
+//             super();
+//             this.render();
+//         }
+//         render() {
+//             let style = document.createElement("style");
+//             style.textContent = `
+//             .container {
+//                 display: flex;
+//                 flex-direction: column;
+//                 align-items: center;
+//             }`;
+//             let shadow = this.attachShadow({ mode: "open" });
+//             let container = document.createElement("div");
+//             container.classList.add("container");
+//             shadow.appendChild(style);
+//             shadow.appendChild(container)
+//         }
+//     }
+//     customElements.define("container-el", Container)
+// }
 (function main() {
-    class title1 extends HTMLElement {
+    // initContainerComp();
+    (0, _title.init)();
+    (0, _subtitle.init)();
+    (0, _mediumText.init)();
+    (0, _header.init)();
+    (0, _form.init)();
+    (0, _footer.init)();
+})();
+
+},{"./components/title/title":"jB2uJ","./components/subtitle/subtitle":"8z2xi","./components/medium-text/medium-text":"2CpwB","./components/header/header":"4f7AX","./components/form/form":"1enI1","./components/footer/footer":"jMkhk"}],"jB2uJ":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "init", ()=>init);
+function init() {
+    class Title extends HTMLElement {
         constructor(){
             super();
-            this.textContent = "soy constructor";
             this.render();
         }
         render() {
             let style = document.createElement("style");
             style.textContent = `
             .container-title {
+                margin-top: 40px;
                 min-height: 65px;
                 max-width: 600px;
             }
+
             .title {
                 font-family: 'Poppins', sans serif;
                 font-size: 52px;
+                font-weight: bold;
                 margin: 0;
+                text-align: center;
+            }
+            .text-intro {
+                font-family: 'Poppins', sans serif;
+                font-size: 22px;
+                margin: 20px 0 70px;
+                text-align: center;
+            }
+            .`;
+            let shadow = this.attachShadow({
+                mode: "open"
+            });
+            let div = document.createElement("div");
+            let title = document.createElement("h1");
+            let textIntro = document.createElement("p");
+            div.classList.add("container-title");
+            title.classList.add("title");
+            textIntro.classList.add("text-intro");
+            title.textContent = "Titulo de esta pagina";
+            textIntro.textContent = "Esta pagina es la mejor sin dudas";
+            div.appendChild(title);
+            div.appendChild(textIntro);
+            shadow.appendChild(style);
+            shadow.appendChild(div);
+        }
+    }
+    customElements.define("title-el", Title);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+exports.interopDefault = function(a) {
+    return a && a.__esModule ? a : {
+        default: a
+    };
+};
+exports.defineInteropFlag = function(a) {
+    Object.defineProperty(a, "__esModule", {
+        value: true
+    });
+};
+exports.exportAll = function(source, dest) {
+    Object.keys(source).forEach(function(key) {
+        if (key === "default" || key === "__esModule" || dest.hasOwnProperty(key)) return;
+        Object.defineProperty(dest, key, {
+            enumerable: true,
+            get: function() {
+                return source[key];
+            }
+        });
+    });
+    return dest;
+};
+exports.export = function(dest, destName, get) {
+    Object.defineProperty(dest, destName, {
+        enumerable: true,
+        get: get
+    });
+};
+
+},{}],"8z2xi":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "init", ()=>init);
+function init() {
+    class Subtitle extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            let style = document.createElement("style");
+            style.textContent = `
+            .container-subtitle {
+                padding: 0 30px;
+                max-width: 600px;
+            }
+
+            .subtitle {
+                font-family: 'Poppins', sans serif;
+                font-size: 38px;
+                font-weight: bold;
+                margin: 0;
+                text-align: left;
+            }
+            .text {
+                font-family: 'Poppins', sans serif;
+                font-size: 18px;
+                padding: 20px 0 20px;
+                text-align: left;
+            }
+            .`;
+            let shadow = this.attachShadow({
+                mode: "open"
+            });
+            let content = document.createElement("div");
+            let subtitle = document.createElement("h3");
+            let containerText = document.createElement("div");
+            let firstText = document.createElement("p");
+            let secondText = document.createElement("p");
+            content.classList.add("container-subtitle");
+            subtitle.classList.add("subtitle");
+            firstText.classList.add("text");
+            secondText.classList.add("text");
+            subtitle.textContent = "Subtitulo";
+            firstText.textContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum culpa reprehenderit quo voluptas, magni reiciendis molestiae sapiente nulla quaerat necessitatibus. Distinctio delectus, laboriosam officia aut quis modi praesentium quibusdam assumenda?";
+            secondText.textContent = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum culpa reprehenderit quo voluptas, magni reiciendis molestiae sapiente nulla quaerat necessitatibus. Distinctio delectus, laboriosam officia aut quis modi praesentium quibusdam assumenda?";
+            content.appendChild(subtitle);
+            containerText.appendChild(firstText);
+            containerText.appendChild(secondText);
+            content.appendChild(containerText);
+            shadow.appendChild(style);
+            shadow.appendChild(content);
+        }
+    }
+    customElements.define("subtitle-el", Subtitle);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2CpwB":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "init", ()=>init);
+function init() {
+    class Text extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            let style = document.createElement("style");
+            style.textContent = `
+            .container-text {
+                max-width: 600px;
+            }
+            .p {
+                font-family: 'Poppins', sans serif;
+                font-size: 22px;
+                font-weight: bold;
+                padding: 100px;
                 text-align: center;
             }`;
             let shadow = this.attachShadow({
                 mode: "open"
             });
+            let content = document.createElement("div");
+            let p = document.createElement("p");
+            content.classList.add("container-text");
+            p.classList.add("p");
+            p.textContent = "Texto del medio de la pagina resaltado.";
+            content.appendChild(p);
             shadow.appendChild(style);
-            let div = document.createElement("div");
-            let title = document.createElement("h1");
-            div.classList.add("container-title");
-            title.classList.add("title");
-            title.textContent = "Titulo de esta pagina";
-            div.appendChild(title);
-            shadow.appendChild(div);
+            shadow.appendChild(content);
         }
     }
-    customElements.define("title-el", title1);
-})();
+    customElements.define("text-el", Text);
+}
 
-},{}]},["iJYvl","h7u1C"], "h7u1C", "parcelRequire54d0")
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"4f7AX":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "init", ()=>init);
+function init() {
+    class Header extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            let style = document.createElement("style");
+            style.textContent = `
+            .header {
+                height: 60px;
+                width: 100%;
+                background-color: #FF8282;
+            }
+            .header-text {
+                font-family: 'Poppins', sans serif;
+                font-size: 22px;
+                font-weight: bold;
+                text-align: center;
+                padding: 15px 0;
+                margin: 0;
+                color: #000;
+            }`;
+            let shadow = this.attachShadow({
+                mode: "open"
+            });
+            let header = document.createElement("header");
+            let p = document.createElement("p");
+            header.classList.add("header");
+            p.classList.add("header-text");
+            p.textContent = "Header";
+            header.appendChild(p);
+            shadow.appendChild(style);
+            shadow.appendChild(header);
+        }
+    }
+    customElements.define("header-el", Header);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1enI1":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "init", ()=>init);
+function init() {
+    class Form extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            let style = document.createElement("style");
+            style.textContent = `
+            .form-container {
+                max-width: 600px;
+                padding: 0 30px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                font-family: 'Poppins', sans-serif;
+            }
+            .label {
+                display: block;
+            }
+            .input {
+                height: 55px;
+                width: 312px;
+                font-size: 18px;
+                border: solid 2px;
+                border-radius: 3px;
+            }
+            .first-button {
+                background-color: #9CBBE9;
+                height: 55px;
+                width: 312px;
+                border: none;
+                border-radius: 3px;
+                font-size: 18px;
+            }
+            .second-button {
+                height: 55px;
+                width: 312px;
+                border: solid 2px;
+                border-radius: 3px;
+                font-size: 18px;
+                margin: 70px 0 60px;
+            }`;
+            let shadow = this.attachShadow({
+                mode: "open"
+            });
+            let formContainer = document.createElement("div");
+            let label = document.createElement("label");
+            let input = document.createElement("input");
+            let firstButton = document.createElement("button");
+            let secondButton = document.createElement("button");
+            formContainer.classList.add("form-container");
+            label.classList.add("label");
+            input.classList.add("input");
+            firstButton.classList.add("first-button");
+            secondButton.classList.add("second-button");
+            label.textContent = "Nombre";
+            input.placeholder = "Ingres\xe1 tu nombre";
+            firstButton.textContent = "Enviar";
+            secondButton.textContent = "Volver";
+            formContainer.appendChild(label);
+            formContainer.appendChild(input);
+            formContainer.appendChild(firstButton);
+            formContainer.appendChild(secondButton);
+            shadow.appendChild(style);
+            shadow.appendChild(formContainer);
+        }
+    }
+    customElements.define("form-el", Form);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jMkhk":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "init", ()=>init);
+function init() {
+    class Footer extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            let style = document.createElement("style");
+            style.textContent = `
+            .footer {
+                height: 233px;
+                width: 100%;
+                background-color: #FFA0EA;
+            }
+            .footer-text {
+                font-family: 'Poppins', sans serif;
+                font-size: 22px;
+                font-weight: bold;
+                text-align: center;
+                padding: 100px;
+                margin: 0;
+                color: #000;
+            }`;
+            let shadow = this.attachShadow({
+                mode: "open"
+            });
+            let footer = document.createElement("footer");
+            let p = document.createElement("p");
+            footer.classList.add("footer");
+            p.classList.add("footer-text");
+            p.textContent = "footer";
+            footer.appendChild(p);
+            shadow.appendChild(style);
+            shadow.appendChild(footer);
+        }
+    }
+    customElements.define("footer-el", Footer);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["iJYvl","h7u1C"], "h7u1C", "parcelRequire54d0")
 
 //# sourceMappingURL=index.b71e74eb.js.map
