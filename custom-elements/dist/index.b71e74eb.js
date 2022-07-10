@@ -538,31 +538,41 @@ var _mediumText = require("./components/medium-text/medium-text");
 var _header = require("./components/header/header");
 var _form = require("./components/form/form");
 var _footer = require("./components/footer/footer");
-// function initContainerComp() {
-//     class Container extends HTMLElement {
-//         constructor() {
-//             super();
-//             this.render();
-//         }
-//         render() {
-//             let style = document.createElement("style");
-//             style.textContent = `
-//             .container {
-//                 display: flex;
-//                 flex-direction: column;
-//                 align-items: center;
-//             }`;
-//             let shadow = this.attachShadow({ mode: "open" });
-//             let container = document.createElement("div");
-//             container.classList.add("container");
-//             shadow.appendChild(style);
-//             shadow.appendChild(container)
-//         }
-//     }
-//     customElements.define("container-el", Container)
-// }
+function initContainerComp() {
+    class Container extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            let style = document.createElement("style");
+            style.textContent = `
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }`;
+            let shadow = this.attachShadow({
+                mode: "open"
+            });
+            let container = document.createElement("div");
+            container.innerHTML = `
+            <title-el></title-el>
+            <subtitle-el></subtitle-el>
+            <text-el></text-el>
+            <subtitle-el></subtitle-el>
+            <div>
+                <form-el label="Nombre"></form-el>
+            </div>`;
+            container.classList.add("container");
+            shadow.appendChild(style);
+            shadow.appendChild(container);
+        }
+    }
+    customElements.define("container-el", Container);
+}
 (function main() {
-    // initContainerComp();
+    initContainerComp();
     (0, _title.init)();
     (0, _subtitle.init)();
     (0, _mediumText.init)();
@@ -762,33 +772,14 @@ function init() {
             this.render();
         }
         render() {
-            let style = document.createElement("style");
-            style.textContent = `
-            .header {
-                height: 60px;
-                width: 100%;
-                background-color: #FF8282;
-            }
-            .header-text {
-                font-family: 'Poppins', sans serif;
-                font-size: 22px;
-                font-weight: bold;
-                text-align: center;
-                padding: 15px 0;
-                margin: 0;
-                color: #000;
-            }`;
-            let shadow = this.attachShadow({
-                mode: "open"
-            });
-            let header = document.createElement("header");
-            let p = document.createElement("p");
-            header.classList.add("header");
-            p.classList.add("header-text");
-            p.textContent = "Header";
-            header.appendChild(p);
-            shadow.appendChild(style);
-            shadow.appendChild(header);
+            this.innerText = "Header";
+            this.style.height = "60px;";
+            this.style.backgroundColor = "#FF8282";
+            this.style.fontSize = "22px";
+            this.style.fontFamily = "'Poppins', sans-serif";
+            this.style.display = "flex";
+            this.style.justifyContent = "center";
+            this.style.alignItems = "center";
         }
     }
     customElements.define("header-el", Header);
@@ -807,7 +798,7 @@ function init() {
         render() {
             let style = document.createElement("style");
             style.textContent = `
-            .form-container {
+           .form-container {
                 max-width: 600px;
                 padding: 0 30px;
                 display: flex;
@@ -845,22 +836,20 @@ function init() {
             let shadow = this.attachShadow({
                 mode: "open"
             });
+            let label = this.getAttribute("label");
             let formContainer = document.createElement("div");
-            let label = document.createElement("label");
-            let input = document.createElement("input");
+            formContainer.classList.add("form-container");
+            formContainer.innerHTML = `
+            <div class="root">
+               <label class="label">${label}</label>
+               <input class="input" type="text" placeholder="Ingrese su ${label}">
+            </div>`;
             let firstButton = document.createElement("button");
             let secondButton = document.createElement("button");
-            formContainer.classList.add("form-container");
-            label.classList.add("label");
-            input.classList.add("input");
             firstButton.classList.add("first-button");
             secondButton.classList.add("second-button");
-            label.textContent = "Nombre";
-            input.placeholder = "Ingres\xe1 tu nombre";
             firstButton.textContent = "Enviar";
             secondButton.textContent = "Volver";
-            formContainer.appendChild(label);
-            formContainer.appendChild(input);
             formContainer.appendChild(firstButton);
             formContainer.appendChild(secondButton);
             shadow.appendChild(style);

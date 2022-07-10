@@ -7,7 +7,7 @@ export function init() {
         render() {
             let style = document.createElement("style");
             style.textContent = `
-            .form-container {
+           .form-container {
                 max-width: 600px;
                 padding: 0 30px;
                 display: flex;
@@ -44,26 +44,26 @@ export function init() {
             }`;
     
             let shadow = this.attachShadow({ mode: "open" })
+            let label = this.getAttribute("label");
 
             let formContainer = document.createElement("div"); 
-            let label = document.createElement("label");
-            let input = document.createElement("input");
+            formContainer.classList.add("form-container");
+            
+            formContainer.innerHTML = `
+            <div class="root">
+               <label class="label">${label}</label>
+               <input class="input" type="text" placeholder="Ingrese su ${label}">
+            </div>`
+            
             let firstButton = document.createElement("button");
             let secondButton = document.createElement("button");
-                
-            formContainer.classList.add("form-container");
-            label.classList.add("label");
-            input.classList.add("input");
+
             firstButton.classList.add("first-button");
             secondButton.classList.add("second-button");
 
-            label.textContent = "Nombre";
-            input.placeholder = "Ingresá tu nombre"
             firstButton.textContent = "Enviar";
             secondButton.textContent = "Volver";
 
-            formContainer.appendChild(label);
-            formContainer.appendChild(input);
             formContainer.appendChild(firstButton);
             formContainer.appendChild(secondButton);
                 

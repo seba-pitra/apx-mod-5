@@ -5,37 +5,45 @@ import { init as headerComp } from "./components/header/header";
 import { init as formComp} from "./components/form/form";
 import { init as footerComp} from "./components/footer/footer";
 
-// function initContainerComp() {
-//     class Container extends HTMLElement {
-//         constructor() {
-//             super();
-//             this.render();
-//         }
-//         render() {
-//             let style = document.createElement("style");
-//             style.textContent = `
-//             .container {
-//                 display: flex;
-//                 flex-direction: column;
-//                 align-items: center;
-//             }`;
+function initContainerComp() {
+    class Container extends HTMLElement {
+        constructor() {
+            super();
+            this.render();
+        }
+        render() {
+            let style = document.createElement("style");
+            style.textContent = `
+            .container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }`;
     
-//             let shadow = this.attachShadow({ mode: "open" });
+            let shadow = this.attachShadow({ mode: "open" });
     
-//             let container = document.createElement("div");
+            let container = document.createElement("div");
+            container.innerHTML = `
+            <title-el></title-el>
+            <subtitle-el></subtitle-el>
+            <text-el></text-el>
+            <subtitle-el></subtitle-el>
+            <div>
+                <form-el label="Nombre"></form-el>
+            </div>`
              
-//             container.classList.add("container");
+            container.classList.add("container");
             
-//             shadow.appendChild(style);
-//             shadow.appendChild(container)
-//         }
-//     }
-//     customElements.define("container-el", Container)
-// }
+            shadow.appendChild(style);
+            shadow.appendChild(container)
+        }
+    }
+    customElements.define("container-el", Container)
+}
 
 (function main() {
     
-    // initContainerComp();
+    initContainerComp();
     titleComp();
     subtitleComp();
     mediumTextComp();
