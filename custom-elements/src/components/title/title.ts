@@ -47,6 +47,5 @@ export function init() {
             shadow.appendChild(div)
         }
     }
-
     customElements.define("title-el", Title)
 }
