@@ -1,77 +1,83 @@
 export function initTextField(params) {
-    class Form extends HTMLElement {
-        constructor() {
-            super();
-            this.render();
-        }
-        render() {
-            let style = document.createElement("style");
-            style.textContent = `
-            .form-intro-text {
-                margin: 0;
-                padding: 73px 30px 30px;  
-                font-size: 22px;
-                font-weight: bold;
+    customElements.define(
+        "text-field",
+        class extends HTMLElement {
+            constructor() {
+                super();
+                this.render();
             }
-           
-            .form-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-                max-width: 600px;
-                padding: 0 30px;
-                font-family: 'Poppins', sans-serif;
-            }
-            .label {
-                display: block;
-            }
-            .input {
-                height: 55px;
-                width: 312px;
-                font-size: 18px;
-                border: solid 2px;
-                border-radius: 3px;
-            }
-            .first-button {
-                background-color: #9CBBE9;
-                height: 55px;
-                width: 312px;
-                border: none;
-                border-radius: 3px;
-                font-size: 18px;
-                margin-bottom: 113px;
-                font-weight: bold;
-            }`;
-    
-            let shadow = this.attachShadow({ mode: "open" })
-    
-            let formContainer = document.createElement("div"); 
-            formContainer.classList.add("form-container");
-            
-            formContainer.innerHTML = `
-            <p class="form-intro-text">
-            Para continuar, por favor ingrese su nombre
-            </p>
-            <div class="root">
-               <label class="label">Nombre</label>
-               <input class="input" type="text" placeholder="Ingrese su nombre">
-               </div>
-            `
-            let firstButton = document.createElement("button");
-            firstButton.classList.add("first-button");
-            firstButton.textContent = "Comenzar";
-            formContainer.appendChild(firstButton);
-            
-           firstButton.addEventListener("click", () => {
-                params.goTo("/b")
-           })
+            render() {
+                let style = document.createElement("style");
+                style.textContent = `
+                .form-intro-text {
+                    margin: 0;
+                    padding: 73px 30px 30px;  
+                    font-size: 22px;
+                    font-weight: bold;
+                }
+               
+                .form-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 15px;
+                    max-width: 600px;
+                    padding: 0 30px;
+                    font-family: 'Poppins', sans-serif;
+                }
+                .label {
+                    display: block;
+                    padding: 0;
+                    text-align: left;
+                }
+                .input {
+                    height: 55px;
+                    width: 312px;
+                    font-size: 18px;
+                    border: solid 2px;
+                    border-radius: 3px;
+                }
+                .first-button {
+                    background-color: #9CBBE9;
+                    height: 55px;
+                    width: 312px;
+                    border: none;
+                    border-radius: 3px;
+                    font-size: 18px;
+                    margin-bottom: 113px;
+                    font-weight: bold;
+                }`;
+        
+                let shadow = this.attachShadow({ mode: "open" })
+                let label = this.getAttribute("label");
                 
-            shadow.appendChild(style);
-            shadow.appendChild(formContainer);
-        }
-    }
-    customElements.define("form-el", Form)
+                let formContainer = document.createElement("div"); 
+                formContainer.classList.add("form-container");
+        
+                formContainer.innerHTML = `
+                <p class="form-intro-text">
+                Para continuar, por favor ingrese su nombre
+                </p>
+                <div class="root">
+                   <label class="label">
+                        <custom-text variant="body">${label}</custom-text>
+                   </label>
+                   <input class="input" type="text" placeholder="Ingrese su nombre">
+                </div>
+                `
+                let firstButton = document.createElement("button");
+                firstButton.classList.add("first-button");
+                firstButton.textContent = "Comenzar";
+                formContainer.appendChild(firstButton);
+                
+               firstButton.addEventListener("click", () => {
+                    params.goTo("/b")
+               })
+                    
+                shadow.appendChild(style);
+                shadow.appendChild(formContainer);
+            }
+        })
 }
 
 export function initTextFieldB(params) {

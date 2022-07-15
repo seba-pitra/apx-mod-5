@@ -1,9 +1,6 @@
-import { initPageA } from "./pages/page-a"
-import { initPageB } from "./pages/page-b"
-import { initPageC } from "./pages/page-c"
-import { initHeader } from "./components/header";
-import { initFooter } from "./components/footer";
-import { initTitle } from "./components/title";
+import { initWelcome } from "./pages/welcome"
+import { initStep1 } from "./pages/step-1"
+import { initThankyou } from "./pages/thankyou"
 import { initTextField } from "./components/text-field";
 import { initTextFieldB } from "./components/text-field";
 import { initTextFieldC } from "./components/text-field";
@@ -11,19 +8,18 @@ import { initTextFieldC } from "./components/text-field";
 const routes = [
     {
         path: /\/a/,
-        component: initPageA
+        component: initWelcome
     },
     {
         path: /\/b/,
-        component: initPageB
+        component: initStep1
     },
     {
         path: /\/c/,
-        component: initPageC
+        component: initThankyou
     }
 ]
 
-    
 export function initRouter(container) {
     function goTo(path) {
         history.pushState({}, "", path);
@@ -41,10 +37,17 @@ export function initRouter(container) {
             }
         }
     }
-    handleRoute(location.pathname);   
-    initHeader();
-    initFooter();
-    initTitle();
+    if (location.pathname == "/") {
+        goTo("/a")
+    } else {
+        handleRoute(location.pathname);  
+    }
+
+    window.onpopstate = function() {
+        handleRoute(location.pathname);
+    };
+
+
     initTextField({goTo: goTo});
     initTextFieldB({goTo: goTo});
     initTextFieldC({goTo: goTo});

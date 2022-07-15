@@ -533,34 +533,37 @@ function hmrAcceptRun(bundle, id) {
 
 },{}],"h7u1C":[function(require,module,exports) {
 var _router = require("./router");
+var _header = require("./components/header");
+var _footer = require("./components/footer");
+var _text = require("./components/text");
 (function() {
+    (0, _header.initHeader)();
+    (0, _footer.initFooter)();
+    (0, _text.initTextComp)();
     const root = document.querySelector(".root");
     (0, _router.initRouter)(root);
 })();
 
-},{"./router":"4QFWt"}],"4QFWt":[function(require,module,exports) {
+},{"./router":"4QFWt","./components/header":"6hCU4","./components/footer":"aoxsu","./components/text":"6Xncd"}],"4QFWt":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initRouter", ()=>initRouter);
-var _pageA = require("./pages/page-a");
-var _pageB = require("./pages/page-b");
-var _pageC = require("./pages/page-c");
-var _header = require("./components/header");
-var _footer = require("./components/footer");
-var _title = require("./components/title");
+var _welcome = require("./pages/welcome");
+var _step1 = require("./pages/step-1");
+var _thankyou = require("./pages/thankyou");
 var _textField = require("./components/text-field");
 const routes = [
     {
         path: /\/a/,
-        component: (0, _pageA.initPageA)
+        component: (0, _welcome.initWelcome)
     },
     {
         path: /\/b/,
-        component: (0, _pageB.initPageB)
+        component: (0, _step1.initStep1)
     },
     {
         path: /\/c/,
-        component: (0, _pageC.initPageC)
+        component: (0, _thankyou.initThankyou)
     }
 ];
 function initRouter(container) {
@@ -577,10 +580,11 @@ function initRouter(container) {
             container.appendChild(el);
         }
     }
-    handleRoute(location.pathname);
-    (0, _header.initHeader)();
-    (0, _footer.initFooter)();
-    (0, _title.initTitle)();
+    if (location.pathname == "/") goTo("/a");
+    else handleRoute(location.pathname);
+    window.onpopstate = function() {
+        handleRoute(location.pathname);
+    };
     (0, _textField.initTextField)({
         goTo: goTo
     });
@@ -592,24 +596,7 @@ function initRouter(container) {
     });
 }
 
-},{"./pages/page-a":"clLWE","./pages/page-b":"bPa4N","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./pages/page-c":"b9pcU","./components/header":"6hCU4","./components/footer":"aoxsu","./components/title":"iClsj","./components/text-field":"iDewp"}],"clLWE":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initPageA", ()=>initPageA);
-function initPageA(params) {
-    const div = document.createElement("div");
-    div.innerHTML = `
-    <header-el></header-el>
-    <div style="display:flex; flex-direction:column; align-items:center">
-      <title-el></title-el>
-      <form-el></form-el>
-      <footer-el style="width:100%"></footer-el>
-    </div>
-    `;
-    return div;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"gkKU3":[function(require,module,exports) {
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3","./components/text-field":"iDewp","./pages/step-1":"fHRFq","./pages/thankyou":"ay1CF","./pages/welcome":"fNSF3"}],"gkKU3":[function(require,module,exports) {
 exports.interopDefault = function(a) {
     return a && a.__esModule ? a : {
         default: a
@@ -639,174 +626,14 @@ exports.export = function(dest, destName, get) {
     });
 };
 
-},{}],"bPa4N":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initPageB", ()=>initPageB);
-function initPageB(params) {
-    const div = document.createElement("div");
-    div.innerHTML = `
-    <header-el></header-el>
-    <div style="display:flex; flex-direction:column; align-items:center">
-      <h1 style="
-      padding: 30px;
-      margin: 0;
-      font-family: 'Poppins', sans serif;
-      font-size: 52px;
-      font-weight: bold;
-      text-align: center;">Necesitamos algunos datos mas</h1>
-      <formulario-el></formulario-el>
-      <footer-el style="width:100%"></footer-el>
-    </div>
-    `;
-    return div;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"b9pcU":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initPageC", ()=>initPageC);
-function initPageC(params) {
-    const div = document.createElement("div");
-    div.innerHTML = `
-    <header-el></header-el>
-    <div style="display:flex; flex-direction:column; align-items:center">
-    <agradecimiento-el></agradecimiento-el>  
-    <footer-el style="width:100%"></footer-el>
-    </div>
-    `;
-    return div;
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6hCU4":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initHeader", ()=>initHeader);
-function initHeader() {
-    class Header extends HTMLElement {
-        constructor(){
-            super();
-            this.render();
-        }
-        render() {
-            this.innerText = "Header";
-            this.style.height = "60px;";
-            this.style.backgroundColor = "#FF8282";
-            this.style.fontSize = "22px";
-            this.style.fontFamily = "'Poppins', sans-serif";
-            this.style.display = "flex";
-            this.style.justifyContent = "center";
-            this.style.alignItems = "center";
-        }
-    }
-    customElements.define("header-el", Header);
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aoxsu":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initFooter", ()=>initFooter);
-function initFooter() {
-    class Footer extends HTMLElement {
-        constructor(){
-            super();
-            this.render();
-        }
-        render() {
-            let style = document.createElement("style");
-            style.textContent = `
-            .footer {
-                height: 233px;
-                width: 100%;
-                background-color: #FFA0EA;
-            }
-            .footer-text {
-                font-family: 'Poppins', sans serif;
-                font-size: 22px;
-                font-weight: bold;
-                text-align: center;
-                padding: 100px;
-                margin: 0;
-                color: #000;
-            }`;
-            let shadow = this.attachShadow({
-                mode: "open"
-            });
-            let footer = document.createElement("footer");
-            let p = document.createElement("p");
-            footer.classList.add("footer");
-            p.classList.add("footer-text");
-            p.textContent = "footer";
-            footer.appendChild(p);
-            shadow.appendChild(style);
-            shadow.appendChild(footer);
-        }
-    }
-    customElements.define("footer-el", Footer);
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iClsj":[function(require,module,exports) {
-var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
-parcelHelpers.defineInteropFlag(exports);
-parcelHelpers.export(exports, "initTitle", ()=>initTitle);
-function initTitle() {
-    class Title extends HTMLElement {
-        constructor(){
-            super();
-            this.render();
-        }
-        render() {
-            let style = document.createElement("style");
-            style.textContent = `
-            .container-title {
-                margin-top: 40px;
-                min-height: 65px;
-                max-width: 600px;
-                padding: 0 30px;
-            }
-    
-            .title {
-                font-family: 'Poppins', sans serif;
-                font-size: 52px;
-                font-weight: bold;
-                margin: 0;
-                text-align: center;
-            }
-            .text-intro {
-                font-family: 'Poppins', sans serif;
-                font-size: 22px;
-                margin: 20px 0 70px;
-                text-align: center;
-            }
-            .`;
-            let shadow = this.attachShadow({
-                mode: "open"
-            });
-            let div = document.createElement("div");
-            let title = document.createElement("h1");
-            let textIntro = document.createElement("p");
-            div.classList.add("container-title");
-            title.classList.add("title");
-            textIntro.classList.add("text-intro");
-            title.textContent = "Titulo de esta pagina";
-            textIntro.textContent = "Esta pagina es la mejor sin dudas";
-            div.appendChild(title);
-            div.appendChild(textIntro);
-            shadow.appendChild(style);
-            shadow.appendChild(div);
-        }
-    }
-    customElements.define("title-el", Title);
-}
-
-},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"iDewp":[function(require,module,exports) {
+},{}],"iDewp":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "initTextField", ()=>initTextField);
 parcelHelpers.export(exports, "initTextFieldB", ()=>initTextFieldB);
 parcelHelpers.export(exports, "initTextFieldC", ()=>initTextFieldC);
 function initTextField(params) {
-    class Form extends HTMLElement {
+    customElements.define("text-field", class extends HTMLElement {
         constructor(){
             super();
             this.render();
@@ -814,56 +641,61 @@ function initTextField(params) {
         render() {
             let style = document.createElement("style");
             style.textContent = `
-            .form-intro-text {
-                margin: 0;
-                padding: 73px 30px 30px;  
-                font-size: 22px;
-                font-weight: bold;
-            }
-           
-            .form-container {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                gap: 15px;
-                max-width: 600px;
-                padding: 0 30px;
-                font-family: 'Poppins', sans-serif;
-            }
-            .label {
-                display: block;
-            }
-            .input {
-                height: 55px;
-                width: 312px;
-                font-size: 18px;
-                border: solid 2px;
-                border-radius: 3px;
-            }
-            .first-button {
-                background-color: #9CBBE9;
-                height: 55px;
-                width: 312px;
-                border: none;
-                border-radius: 3px;
-                font-size: 18px;
-                margin-bottom: 113px;
-                font-weight: bold;
-            }`;
+                .form-intro-text {
+                    margin: 0;
+                    padding: 73px 30px 30px;  
+                    font-size: 22px;
+                    font-weight: bold;
+                }
+               
+                .form-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    gap: 15px;
+                    max-width: 600px;
+                    padding: 0 30px;
+                    font-family: 'Poppins', sans-serif;
+                }
+                .label {
+                    display: block;
+                    padding: 0;
+                    text-align: left;
+                }
+                .input {
+                    height: 55px;
+                    width: 312px;
+                    font-size: 18px;
+                    border: solid 2px;
+                    border-radius: 3px;
+                }
+                .first-button {
+                    background-color: #9CBBE9;
+                    height: 55px;
+                    width: 312px;
+                    border: none;
+                    border-radius: 3px;
+                    font-size: 18px;
+                    margin-bottom: 113px;
+                    font-weight: bold;
+                }`;
             let shadow = this.attachShadow({
                 mode: "open"
             });
+            let label = this.getAttribute("label");
             let formContainer = document.createElement("div");
             formContainer.classList.add("form-container");
             formContainer.innerHTML = `
-            <p class="form-intro-text">
-            Para continuar, por favor ingrese su nombre
-            </p>
-            <div class="root">
-               <label class="label">Nombre</label>
-               <input class="input" type="text" placeholder="Ingrese su nombre">
-               </div>
-            `;
+                <p class="form-intro-text">
+                Para continuar, por favor ingrese su nombre
+                </p>
+                <div class="root">
+                   <label class="label">
+                        <custom-text variant="body">${label}</custom-text>
+                   </label>
+                   <input class="input" type="text" placeholder="Ingrese su nombre">
+                </div>
+                `;
             let firstButton = document.createElement("button");
             firstButton.classList.add("first-button");
             firstButton.textContent = "Comenzar";
@@ -874,8 +706,7 @@ function initTextField(params) {
             shadow.appendChild(style);
             shadow.appendChild(formContainer);
         }
-    }
-    customElements.define("form-el", Form);
+    });
 }
 function initTextFieldB(params) {
     class FormB extends HTMLElement {
@@ -1049,6 +880,167 @@ function initTextFieldC(params) {
         }
     }
     customElements.define("agradecimiento-el", FormC);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fHRFq":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initStep1", ()=>initStep1);
+function initStep1(params) {
+    const div = document.createElement("div");
+    div.innerHTML = `
+    <header-el></header-el>
+    <div style="display:flex; flex-direction:column; align-items:center">
+      <h1 style="
+      padding: 30px;
+      margin: 0;
+      font-family: 'Poppins', sans serif;
+      font-size: 52px;
+      font-weight: bold;
+      text-align: center;">Necesitamos algunos datos mas</h1>
+      <formulario-el></formulario-el>
+      <footer-el style="width:100%"></footer-el>
+    </div>
+    `;
+    return div;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"ay1CF":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initThankyou", ()=>initThankyou);
+function initThankyou(params) {
+    const div = document.createElement("div");
+    div.innerHTML = `
+    <header-el></header-el>
+    <div style="display:flex; flex-direction:column; align-items:center">
+    <agradecimiento-el></agradecimiento-el>  
+    <footer-el style="width:100%"></footer-el>
+    </div>
+    `;
+    return div;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"fNSF3":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initWelcome", ()=>initWelcome);
+function initWelcome(params) {
+    const div = document.createElement("div");
+    div.innerHTML = `
+    <header-el></header-el>
+    <div style="display:flex; flex-direction:column; align-items:center">
+      <custom-text variant="title">Te damos la bienvenida a esta pagina</custom-text>
+      <custom-text variant="body">
+        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quasi at illum a in dolorem, 
+        neque repudiandae omnis minus nulla laudantium totam commodi repellendus sit? 
+        In ipsa impedit voluptatem deleniti culpa?
+      </custom-text>
+      <text-field label="Nombre"></text-field>
+      <footer-el style="width:100%"></footer-el>
+    </div>
+    `;
+    return div;
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6hCU4":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initHeader", ()=>initHeader);
+function initHeader() {
+    class Header extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            this.innerText = "Header";
+            this.style.height = "60px;";
+            this.style.backgroundColor = "#FF8282";
+            this.style.fontSize = "22px";
+            this.style.fontFamily = "'Poppins', sans-serif";
+            this.style.display = "flex";
+            this.style.justifyContent = "center";
+            this.style.alignItems = "center";
+        }
+    }
+    customElements.define("header-el", Header);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"aoxsu":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initFooter", ()=>initFooter);
+function initFooter() {
+    class Footer extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            let style = document.createElement("style");
+            let shadow = this.attachShadow({
+                mode: "open"
+            });
+            let footer = document.createElement("footer");
+            let p = document.createElement("p");
+            p.textContent = "Footer";
+            footer.style.height = "233px;";
+            footer.style.backgroundColor = "#FFA0EA";
+            footer.style.fontSize = "22px";
+            footer.style.fontWeight = "bold";
+            footer.style.fontFamily = "'Poppins', sans-serif";
+            p.style.fontFamily = "'Poppins', sans serif;";
+            p.style.fontWeight = "bold";
+            p.style.textAlign = "center";
+            p.style.padding = "100px";
+            p.style.margin = "0px";
+            footer.appendChild(p);
+            shadow.appendChild(footer);
+            shadow.appendChild(style);
+        }
+    }
+    customElements.define("footer-el", Footer);
+}
+
+},{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"6Xncd":[function(require,module,exports) {
+var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
+parcelHelpers.defineInteropFlag(exports);
+parcelHelpers.export(exports, "initTextComp", ()=>initTextComp);
+function initTextComp() {
+    class TextComponent extends HTMLElement {
+        constructor(){
+            super();
+            this.render();
+        }
+        render() {
+            const variant = this.getAttribute("variant") || "body";
+            const shadow = this.attachShadow({
+                mode: "open"
+            });
+            const div = document.createElement("div");
+            let style = document.createElement("style");
+            style.textContent = `
+            .title {
+                font-family: 'Poppins', sans serif;
+                font-size: 52px;
+                font-weight: bold;
+                margin: 30px 0 0;
+                text-align: center;
+            }
+            .body {
+                font-family: 'Poppins', sans serif;
+                font-size: 18px;
+                padding: 30px;
+                text-align: center;
+            }`;
+            div.className = variant;
+            div.textContent = this.textContent;
+            shadow.appendChild(div);
+            shadow.appendChild(style);
+        }
+    }
+    customElements.define("custom-text", TextComponent);
 }
 
 },{"@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}]},["iJYvl","h7u1C"], "h7u1C", "parcelRequire64c4")
