@@ -1,0 +1,11 @@
+{
+  "name": "state",
+  "version": "1.0.0",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^2.6.2"
+  },
+  "scripts": {
+    "dev": "parcel serve ./src/index.html"
+  }
+}
